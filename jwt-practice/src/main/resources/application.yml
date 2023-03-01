@@ -1,0 +1,40 @@
+spring:
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jwtpractice # server 모드
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop # SessionFactory가 시작될 때 Drop, Create, Alter하고 종료될 때 Drop 진행. 서버가 시작될 때 마다 테이블을 새로 만듬
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    com.example: DEBUG
+
+
+jwt:
+  header: Authorization
+  #secret 값은 특정 문자열을 base64로 encoding. 명령어 echo '특정 문자열' | base64 사용. 토큰의 암호화, 복호화를 위해 사용
+  secret: c2V1bmd3b29uLWtpbS1zcHJpbmctYm9vdC1qcGEtcHJhY3RpY2Utc2VjcmV0LXNldW5nd29vbi10ZWNoLXNwcmluZy1ib290LXByYWN0aWNlLWdvb2QK
+  accessToken-validity-in-seconds: 120 # 2분
+  refreshToken-validity-in-seconds: 259200 # 3일
+
+
+
